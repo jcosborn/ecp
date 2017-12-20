@@ -19,3 +19,5 @@ new CG interface
 
 spin
 wilson dslash
+
+.. include:: spin.rst

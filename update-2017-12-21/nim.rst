@@ -9,7 +9,10 @@ Current version `0.17.2`_ (Sep 7, 2017)
 Next version 0.18
 - many bug fixes
 - major improvements to concepts (user type classes)
-- possibly improved destructors_ (maybe later)
+- `runnableExamples` and `:test:` in documentation
+
+Development work on improved destructors_
+- available for testing, should appear in later release
 
 .. _0.17.2: https://nim-lang.org/blog/2017/09/07/version-0172-released.html
 
