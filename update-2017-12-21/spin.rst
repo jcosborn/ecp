@@ -87,7 +87,7 @@ First pass at implementing Spin projection
      spprojmat1p* = p([[ z1, z0, z0, zi ],
 	               [ z0, z1, zi, z0 ]])
 
-     h := spprojmat1p * d
+   h := spprojmat1p * d
 
 Spin and Color loops explicitly unrolled.
 Allowed C compiler to optimize away unnecessary addition and multiplication
