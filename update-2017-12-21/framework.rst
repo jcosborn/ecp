@@ -38,17 +38,40 @@ Profiling
 IO (parallel)
 --------------------
 
-portability GPU/CPU arrays (not integrated in QEX yet)
+Calls ``QIO`` and use ``QIO_PARALLEL``.
+
+Portability GPU/CPU
 --------------------
 
-compatibility, reproducibility with FUEL (-d:FUELCompat)
+- Exploration of shared GPU/CPU arrays backends
+- Extensive compile time options for memory layout
+- Saturates GPU/CPU bandwidth for optimal data sizes
+- Not integrated in QEX yet
+- Check out the repository_
+
+.. _repository: https://github.com/jcosborn/cudanim
+
+Compatibility, reproducibility with FUEL
 --------------------
 
-optimizeAst (temporary let)
---------------------
+Introduced a compilation flag, ``-d:FUELCompat``, for reproducibility test against FUEL.
 
 new CG interface
 --------------------
+
+.. code:: nim
+  var cg = newCgState(x=v2, b=v1)
+  cg.solve(oa, sp)    # The default solve
+
+  v2 := 0
+  cg.reset
+  sp.maxits = 0
+  while cg.r2 > cg.r2stop:   # Solve with finer control
+    sp.maxits += 10
+    cg.solve(oa, sp)
+    let c = cg.x.norm2
+    echo cg.iterations, ": ", c
+
 
 Spin & wilson dslash
 --------------------
