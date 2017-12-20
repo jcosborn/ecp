@@ -1,5 +1,5 @@
 Object wrapper types
---------------------
+~~~~~~~~~~~~~~~~~~~~
 
 Added support for custom tensor types.
 Currently supports `Color`, `Spin` as wrappers
@@ -71,7 +71,7 @@ Other physical types (Color, Spin, Tensor, ...) built on top of
 base mathematical layer.
 
 Spin matrices
--------------
+~~~~~~~~~~~~~~~~~~~~
 
 First pass at implementing Spin projection
 
@@ -107,8 +107,10 @@ Currently implementing projectors by hand
 Have working Wilson Dslash using these projectors and reconstructors.
 
 Optimization
-------------
+~~~~~~~~~~~~~~~~~~~~
 
-New code uses lots of `let` s.
+- New code uses lots of ``let`` s.
 
-Can lead to unnecessary copies.
+- Can lead to unnecessary copies.
+
+- Use ``nim``'s metaprogramming capabilities to sofely remove unnecessary ``let``'s.
