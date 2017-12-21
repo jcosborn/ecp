@@ -4,13 +4,16 @@ QEX build system updates
 Build system
 --------------------
 
-Currently supports two separate system:
-1. ``configure`` and ``make``, which only uses ``nim``;
-2. ``nimble``, which automatic installs external ``nim`` package dependencies. 
+Currently supports two separate systems:
+- ``configure`` and ``make`` scripts, which use ``Nim`` underneath
+- ``nimble``, which automatically installs external ``Nimble``
+  package dependencies
 
-Check the readme_ file for details.
+Check out the readme_ file and Nimble_ documentation for details.
 
 .. _readme: https://github.com/jcosborn/qex/blob/devel/README.md
+
+.. _Nimble: https://github.com/nim-lang/nimble
 
 Configure and make
 ~~~~~~~~~~~~~~~~~~~~
@@ -25,7 +28,7 @@ Under your working directory, run
 Edit ``config.nims`` to suit your system.
 
 .. code:: sh
-  make testStagProp
+  make test/examples/testStagProp
 
 Nimble
 ~~~~~~~~~~~~~~~~~~~~
@@ -46,37 +49,41 @@ Examples:
 
 .. code:: sh
   nimble make debug test0
-  nimble make example/testStagProp
+  nimble make examples/testStagProp
+
+Fixed a few issues with ``Nimble`` to allow it to work in multi-user
+and shared home directory environments.
+
 
 External dependencies
 --------------------
 
-Required packages:
-- ``qmp``
-- ``qio``
+Currently required packages:
+- ``QMP``
+- ``QIO``
 
 Optional packages:
 - ``LAPACK``
-- ``PRIMME`` & the ``primme`` nimble package
-- ``QUDA`` & ``CUDA``
+- ``PRIMME`` and the primme_ Nimble package
+- ``QUDA`` and ``CUDA``
 
-Automatic ``nimble`` managed packages:
-- ``chebyshev``
-- ``primme`` (optional)
+Automatic ``Nimble`` managed packages:
+- chebyshev_
+- primme_ (optional)
 
-Continuous integration (Travis CI)
+.. _primme: https://github.com/jxy/primme
+
+.. _chebyshev: https://github.com/jxy/chebyshev
+
+
+Documentation, examples and testing
 --------------------
 
-- Automatic testing against ``master`` branch of ``nim``
-- Compile and run any file whose name starting with a ``t`` under ``tests`` direcotry
-- Better reporting and performance regression tests under development
+Added continuous integration (Travis CI)
+- Automatic testing against ``devel`` branch
 
-Tests, examples
---------------------
+Better reporting and performance regression tests under development
 
-The files under directories, `tests/base`_ and `tests/examples`_,
-serve as a collection of introductory learning guides for starting
-with QEX.
-
-.. _`tests/base`: https://github.com/jcosborn/qex/tree/devel/tests/base
-.. _`tests/examples`: https://github.com/jcosborn/qex/tree/devel/tests/examples
+Will start integrating examples, documentation and tests once new
+``runnableExamples`` and ``:test:`` are available
+- can use examples, tutorials and inline documentation as unit tests

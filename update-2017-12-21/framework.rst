@@ -1,63 +1,47 @@
 QEX framework updates
 =====================
 
+Field I/O
+--------------------
+
+Added gauge writer.
+
 Random sources
 --------------------
 
-Supports ``gaussian``, ``uniform``, ``u1``, ``z2``, and ``z4``.
+Now supports ``gaussian``, ``uniform``, ``u1``, ``z2``, and ``z4``.
 
 .. code:: nim
   var
     lo = newLayout([8,8,8,8])
     r = lo.newRNGField(RngMilc6, seed)
-    eta = lo.ColorVecto
+    eta = lo.ColorVector
   eta.z4 r
 
-Quda integration
---------------------
-
-Calling Quda inverter (currently only staggered fermion) works for multi GPU / multi node.
-
-.. code:: nim
-  var s = g.newStag
-  s.solve(dest, src, m, resid)    # By default will call Quda solver if compiled in.
-  s.solve(dest, src, m, resid, cpuonly = true)    # Always use CPU.
-
-where ``g`` is a gauge object.
-
-Profiling
---------------------
-
-.. code:: nim
-  tic("Timing Label")    # Begin measuring time duration for a label
-  tic()    # Begin measuring time duration without a label (record file & line number)
-  DoSomething()
-  toc()    # End measuring time duration from the last ``tic()`` call
-  toc("Timing Label")   # End measuring time duration for the specific label
-
-IO (parallel)
---------------------
-
-Calls ``QIO`` and use ``QIO_PARALLEL``.
+Introduced a compilation flag, ``-d:FUELCompat``, for reproducibility
+test against FUEL.
 
 Portability GPU/CPU
 --------------------
 
-- Exploration of shared GPU/CPU arrays backends
+- Exploration of shared GPU/CPU array backends
+- Using coalesced pointer approach
 - Extensive compile time options for memory layout
 - Saturates GPU/CPU bandwidth for optimal data sizes
+- Presented at `DOE COE Performance Portability Meeting 2017`_
 - Not integrated in QEX yet
 - Check out the repository_
 
+.. _DOE COE Performance Portability Meeting 2017: http://www.lanl.gov/asc/doe-coe-mtg-2017.php
+
 .. _repository: https://github.com/jcosborn/cudanim
 
-Compatibility, reproducibility with FUEL
+.. include:: spin.rst
+
+New CG interface
 --------------------
 
-Introduced a compilation flag, ``-d:FUELCompat``, for reproducibility test against FUEL.
-
-new CG interface
---------------------
+*Resumable* solvers, as discussed on the Solver call.
 
 .. code:: nim
   var cg = newCgState(x=v2, b=v1)
@@ -71,9 +55,3 @@ new CG interface
     cg.solve(oa, sp)
     let c = cg.x.norm2
     echo cg.iterations, ": ", c
-
-
-Spin & wilson dslash
---------------------
-
-.. include:: spin.rst

@@ -1,5 +1,5 @@
 Object wrapper types
-~~~~~~~~~~~~~~~~~~~~
+--------------------
 
 Added support for custom tensor types.
 Currently supports `Color`, `Spin` as wrappers
@@ -49,7 +49,10 @@ by adding appropriate overloads
    template `*`*(x: Color, y: Spin): untyped =
      asSpin(asScalar(x) * y[])
 
-Currently updating structure to use these wrapper types
+   template `*`*(x: Color, y: Color): untyped =
+     asColor(x[] * y[])
+
+Also updating framework to use these basic mathematical wrapper types
 
 .. code:: Nim
 
@@ -71,7 +74,7 @@ Other physical types (Color, Spin, Tensor, ...) built on top of
 base mathematical layer.
 
 Spin matrices
-~~~~~~~~~~~~~~~~~~~~
+--------------------
 
 First pass at implementing Spin projection
 
@@ -100,17 +103,22 @@ Currently implementing projectors by hand
 
    template spproj1p*(xx: Spin): untyped =
      let x = xx
-     let v0 = x[][0] + I(x[][3])
-     let v1 = x[][1] + I(x[][2])
+     let v0 = x[0] + I(x[3])
+     let v1 = x[1] + I(x[2])
      spinVector[type(v0)](2,[v0,v1])
 
 Have working Wilson Dslash using these projectors and reconstructors.
 
+Eventually plan to have special operator overloads for constant matrices
+that performs arithmetic at compile time.
+
 Optimization
-~~~~~~~~~~~~~~~~~~~~
+--------------------
 
-- New code uses lots of ``let`` s.
+New code uses lots of ``let``'s.
+Can lead to unnecessary copies.
+C compilers could optimize it away, but in practice don't always.
 
-- Can lead to unnecessary copies.
-
-- Use ``nim``'s metaprogramming capabilities to sofely remove unnecessary ``let``'s.
+Introduced macro `optimizeAst` which goes through final code and
+removes unnecessary copies.
+Can make a large difference in performance for larger objects.
