@@ -119,6 +119,8 @@ New code uses lots of ``let``'s.
 Can lead to unnecessary copies.
 C compilers could optimize it away, but in practice don't always.
 
-Introduced macro `optimizeAst` which goes through final code and
+Introduced macro `optimizeAst`_ which goes through final code and
 removes unnecessary copies.
 Can make a large difference in performance for larger objects.
+
+.. _optimizeAst: https://github.com/jcosborn/qex/blob/devel/src/base/optlet.nim
