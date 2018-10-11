@@ -10,7 +10,8 @@ QEX/Nim update 2018-10-18
 .. include:: expressions.rst
 .. include:: hmc.rst
 .. include:: analysis.rst
-
+.. include:: mg.rst
+.. include:: exascale.rst
 
 ..
   Status.im, core developer

@@ -1,12 +1,15 @@
 Analysis
 ========
 
+This is taken from the Analysis Framework document.
+
 Below is a simple example showing the calculation of a staggered meson
 propagator starting from a point source.  It also calculates meson
 propagators with symmetric shifts at the source and sink.  In this
 example, at the sink, the results are summed over time slices, but on
 each time slice the sums are done on separate subsets according to the
-eight corners of a $2^3$ spatial cube, $(x\mod 2, y\mod 2, z\mod 2)$.
+eight corners of a :math:`2^3` spatial cube,
+:math:`(x\,\mathrm{mod}\,2, y\,\mathrm{mod}\,2, z\,\mathrm{mod}\,2)`.
 
 In this example, the gauge field file (USQCD SciDAC format), quark
 mass, source-point location, and solver stopping residual (squared)
@@ -65,74 +68,74 @@ lines Description
 ----- -----------
 1     Initialize QEX.
 
-3     The \verb|defaultSetup()| call reads the gauge field file name from
+3     The ``defaultSetup()`` call reads the gauge field file name from
       the command line, gets the lattice dimension from it, and
-      creates the layout (\verb|lo|) and gauge field (\verb|g|)
-      objects from data in that file.  The \verb|lo| and \verb|g|
+      creates the layout (``lo``) and gauge field (``g``)
+      objects from data in that file.  The ``lo`` and ``g``
       objects are injected into the local scope so they can be used
       later in the code.
 
 4-7   Create some staggered fermion fields (lattice color vectors).
 
 9-10  Set default boundary conditions (antiperiodic) and staggered
-      phases (following MILC conventions) for gauge field \verb|g|.
+      phases (following MILC conventions) for gauge field ``g``.
       This operation multiplies each gauge link by the appropriate
-      phase. The code appears inside a \verb|thread:| block so that it
+      phase. The code appears inside a ``thread:`` block so that it
       runs with threading.
 
 11    Create a staggered fermion object from gauge field.
 
-12    Set mass value from command line (e.g. \verb|-d:mass:0.001|).
+12    Set mass value from command line (e.g. ``-d:mass:0.001``).
 
-13    Get number of timeslices (\verb|nt|) from last element of physical
-      geometry array (\verb|^1| indexes the last element of an array).
+13    Get number of timeslices (``nt``) from last element of physical
+      geometry array (``^1`` indexes the last element of an array).
 
-15-18 Create sequences (a dynamically sized array) of length \verb|nt|
+15-18 Create sequences (a dynamically sized array) of length ``nt``
       with elements of type array of 8 floats (float in Nim is double
       precision).  These will be used for the correlators on each
       timeslice and spatial hypercube corner.
 
-19    Create array of pointers to the \verb|cx|, \verb|cy| and \verb|cz|
+19    Create array of pointers to the ``cx``, ``cy`` and ``cz``
       sequences, for later convenience.
 
-21    Get source point from command line (e.g. \verb|-d:pt:0,0,0,10|).
+21    Get source point from command line (e.g. ``-d:pt:0,0,0,10``).
 
 22    Get source timeslice from last element of source point.
 
-23    Loop over colors (for $N_c = 3$).
+23    Loop over colors (for :math:`N_c = 3`).
 
-24    Set field \verb|src| to a point source at point \verb|pt| with color
-      \verb|ic| with default value of $1.0$.
+24    Set field ``src`` to a point source at point ``pt`` with color
+      ``ic`` with default value of :math:`1.0`.
 
-25    Solves staggered Dirac equation against source \verb|src|, putting
-      result in \verb|dest|. The procedure \verb|mysolve| is a
+25    Solves staggered Dirac equation against source ``src``, putting
+      result in ``dest``. The procedure ``mysolve`` is a
       user-defined helper routine that gets the appropriate parameters
       (such as required residual norm) from the command line and then
       calls the appropriate solver routine.  An example code is given
       below.
 
 26    Perform contractions (inner product) of 2 fields (in this case they
-      are the same field, \verb|dest|) along timeslices and spatial
+      are the same field, ``dest``) along timeslices and spatial
       corners and return the result.  The timeslice of the source
-      (\verb|t0|) is passed in so that the result can be rotated to
-      start relative to \verb|t0|.
+      (``t0``) is passed in so that the result can be rotated to
+      start relative to ``t0``.
 
 27    Loop over spatial directions.
 
 28    Perform a symmetric shift (parallel transport actually, from both
-      forward and backward directions) of source vector, \verb|src|, in
-      direction \verb|mu|, using gauge field \verb|g[mu]| to multiply
-      source vector, and store the result in field \verb|r|.
+      forward and backward directions) of source vector, ``src``, in
+      direction ``mu``, using gauge field ``g[mu]`` to multiply
+      source vector, and store the result in field ``r``.
 
-29    Solve against shifted source \verb|r| and store result in \verb|destS|.
+29    Solve against shifted source ``r`` and store result in ``destS``.
 
-30    Perform a symmetric shift in the direction \verb|mu| on
-      \verb|destS| and store the result in \verb|r|.
+30    Perform a symmetric shift in the direction ``mu`` on
+      ``destS`` and store the result in ``r``.
 
 31    Perform contractions between the original point-source quark and
-      the symmertic shifted quark.  \verb|cs[mu]| gives the pointer to
-      the sequence for the \verb|mu| direction, and the final
-      \verb|[]| dereferences that pointer (like \verb|*| in C) to give
+      the symmertic shifted quark.  ``cs[mu]`` gives the pointer to
+      the sequence for the ``mu`` direction, and the final
+      ``[]`` dereferences that pointer (like ``*`` in C) to give
       the sequence itself (which is then updated by adding in the new
       correlator).
 
@@ -141,11 +144,11 @@ lines Description
 38    Finalize QEX.
 ===== ===========
 
-We give an example implementation of the \verb|mysolve| routine below.
+We give an example implementation of the ``mysolve`` routine below.
 It is defined as a Nim template so that the code will be explicitly
 inlined at the call site (like a macro in C).  This way the code can
-use the previously defined staggered object, \verb|s|, quark mass,
-\verb|m|, and residual vector field, \verb|r|, from the scope where it
+use the previously defined staggered object, ``s``, quark mass,
+``m``, and residual vector field, ``r``, from the scope where it
 is called.
 
 .. code:: Nim
@@ -169,11 +172,11 @@ An explanation follows:
 ===== ===========
 lines Description
 ----- -----------
-2-3   Create solver parameters structure and set the residual norm
-      squared request from the command line (with a default of $10^{-12}$).
+2-3   Create solver parameters structure and set the residual norm squared
+      request from the command line (with a default of :math:`10^{-12}`).
 
-4     Run the solver using staggered object \verb|s|, with mass \verb|m|
-      and solver parameters \verb|sp|.
+4     Run the solver using staggered object ``s``, with mass ``m``
+      and solver parameters ``sp``.
 
 8-12  Calculate residual and print norm2.
 ===== ===========
@@ -189,7 +192,7 @@ interest in an analysis campaign.
   coef.smear(g, sg, info)
 
 The code above creates a Hyp smearing object and sets a new gauge field
-\verb|sg| with the Hyp smeared gauge field.  \verb|info| is a performance
+``sg`` with the Hyp smeared gauge field.  ``info`` is a performance
 info object used to return information such as number of flops performed.
 
 .. code:: Nim
@@ -202,10 +205,10 @@ info object used to return information such as number of flops performed.
   var s = newStag3(fl, ll)
 
 The code above creates a HISQ smearing object and sets two new gauge fields
-\verb|fl| and \verb|ll| with the fat and long links of the HISQ smeared
+``fl`` and ``ll`` with the fat and long links of the HISQ smeared
 gauge field.
 A new staggered object (which supports a 1-link and 3-link stencil)
- is then created from the fat and long links.
+is then created from the fat and long links.
 This staggered object is actually the same type as the one created for
 a 1-link only stencil.
 Internally the object knows what stencil to use and will apply the correct
@@ -223,9 +226,9 @@ one for the Dslash and solver operations.
     of "U1": eta.u1 rf
     of "Gauss": eta.gaussian rf
 
-This creates a random field, \verb|rf|, using the MILC RNG type,
-then sets the field \verb|eta| with random numbers based on the
-distribution type from the input string \verb|source_type|.
+This creates a random field, ``rf``, using the MILC RNG type,
+then sets the field ``eta`` with random numbers based on the
+distribution type from the input string ``source_type``.
 
 .. code:: Nim
 
@@ -241,21 +244,8 @@ distribution type from the input string \verb|source_type|.
 
 The code above sets a dilution pattern read in from the command line
 (only EO and CORNER currently supported) and then loops over the subsets,
-\verb|dl|, within the dilution pattern.
-The source field \verb|tmps| is first set to zero, then it loops over all
+``dl``, within the dilution pattern.
+The source field ``tmps`` is first set to zero, then it loops over all
 sites within the current dilution subset and if the site is on the source
-timeslice, \verb|t0|, it copies the random source, \verb|eta|,
-at that site over to \verb|tmps|.
-
-Nim is a versatile language for managing an analysis framework. It
-provides vertical access to data structures from high-level to low.
-The main disadvantage is that it is relatively new, so it is evolving more
-rapidly than, say Python.  It has a growing user base, but its size is
-still far from that of Python or C++.  For a novice lattice user, the
-learning curve would be simpler starting from a standardized library
-of lattice objects, methods, and procedures.  Those elements
-constitute, in effect, a domain-specific language.
-The Nim/QEX analysis code is still growing and doesn't provide much
-documentation yet, other than some example codes.
-More documentation will be needed for others to make better use
-of it and perform analysis tasks for which examples don't aleready exist.
+timeslice, ``t0``, it copies the random source, ``eta``,
+at that site over to ``tmps``.
