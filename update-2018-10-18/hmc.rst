@@ -117,6 +117,9 @@ among the three integrators.
 
 You can find more examples in the test file, `test1.nim`_.
 
-:: _MDevolve: https://github.com/jxy/MDevolve
-:: _`puregaugehmc.nim`: https://github.com/jcosborn/qex/blob/devel/src/examples/puregaugehmc.nim
-:: _`test1.nim`: https://github.com/jxy/MDevolve/blob/master/tests/test1.nim
+
+.. _Mdevolve: https://github.com/jxy/MDevolve
+
+.. _`puregaugehmc.nim`: https://github.com/jcosborn/qex/blob/devel/src/examples/puregaugehmc.nim
+
+.. _`test1.nim`: https://github.com/jxy/MDevolve/blob/master/tests/test1.nim
