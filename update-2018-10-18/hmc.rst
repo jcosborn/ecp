@@ -1,6 +1,23 @@
 HMC
 ===
 
+
+Quasi-Newton HMC
+----------------
+
+Quasi-Newton HMC code has been developed by Xiao-Yong for Critical Slowing
+Down project.  It is currently being tested on U(1) Gauge Theory.
+
+The code implements a BFGS ensemble HMC algorithm using QEX.
+
+It also calculates eigenvalues of the mass matrix using PRIMME.
+
+The MD framework is available as a separate Nimble package.
+
+
+MD Framework
+------------
+
 We have a new nimble package for molecular dynamics evolution, MDevolve_.
 The following is an example, which is a snippet took from `puregaugehmc.nim`_,
 showing the usage.
