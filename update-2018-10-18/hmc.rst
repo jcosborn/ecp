@@ -24,42 +24,38 @@ showing the usage.
 
 .. code:: Nim
 
-  proc mdt(t:float) =
+  proc mdt(t: float) =
     threads:
-      for i in 0..<g.len:
-        for e in g[i]:
-          let etpg = exp(t*p[i][e])*g[i][e]
-          g[i][e] := etpg
-  proc mdv(t:float) =
+      for mu in 0..<g.len:
+        for s in g[mu]:
+          g[mu][s] := exp(t*p[mu][s])*g[mu][s]
+  proc mdv(t: float) =
     f.gaugeforce2(g, gc)
     threads:
-      for i in 0..<f.len:
-        for e in f[i]:
-          let tf = (-t)*f[i][e]
-          p[i][e] += tf
-  
+      for mu in 0..<f.len:
+        p[mu] -= t*f[mu]
+
   # For FGYin11
-  proc fgv(t:float) =
+  proc fgv(t: float) =
     f.gaugeforce2(g, gc)
     threads:
-      for i in 0..<g.len:
-        for e in g[i]:
-          let etfg = exp((-t)*f[i][e])*g[i][e]
-          g[i][e] := etfg
+      for mu in 0..<g.len:
+        for s in g[mu]:
+          g[mu][s] := exp((-t)*f[mu][s])*g[mu][s]
   var gg = lo.newgauge
   proc fgsave =
     threads:
-      for i in 0..<g.len:
-        gg[i] := g[i]
+      for mu in 0..<g.len:
+        gg[mu] := g[mu]
   proc fgload =
     threads:
-      for i in 0..<g.len:
-        g[i] := gg[i]
+      for mu in 0..<g.len:
+        g[mu] := gg[mu]
 
   let
     # H = mkOmelyan4MN5FV(steps = steps, V = mdv, T = mdt)
     H = mkFGYin11(steps = steps, V = mdv, T = mdt, Vfg = fgv,
-      save = fgsave(), load = fgload())
+                  save = fgsave(), load = fgload())
 
   H.evolve tau
 

@@ -1,7 +1,7 @@
 QEX Expression Optimization
 ===========================
 
-Working on new Field framework that can optimize shifts inside expressions.
+Working on new Field framework that can optimize expressions containing shifts.
 
 Example code can handle expressions such as
 
@@ -79,10 +79,9 @@ gets split apart, effectively becoming
   r := m1 * t
 
 
-Expression Optimization status
-------------------------------
-
 Still just a prototype.  Currently missing subsets (easy), and nested
 shifts (more difficult, but follows the same patterns).
-
-Not in active development now due to other priorities.
+Priority has shifted to other efforts (preparing for Summit/Sierra and
+work on MG).
+Plan to start incorporating parts of this new approach gradually into
+QEX.
