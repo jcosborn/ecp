@@ -6,9 +6,13 @@ Quasi-Newton HMC
 ----------------
 
 Quasi-Newton HMC code has been developed by Xiao-Yong for Critical Slowing
-Down project.  It is currently being tested on U(1) Gauge Theory.
+Down project.  It is currently being tested on U(1) Gauge Theory in 2D.
+The code, however, supports arbitrary dimension and arbitrary SU(N),
+execept for the computation of topological charges.
 
-The code implements a BFGS ensemble HMC algorithm using QEX.
+The code currently lives in a separate git branch of QEX, qnhmc_, and the main
+code is `puregauge2du1qn.nim`_.
+It implements a BFGS ensemble HMC algorithm using QEX.
 
 It also calculates eigenvalues of the mass matrix using PRIMME.
 
@@ -84,8 +88,30 @@ An object that does not use force gradient update can be created
 similarly, by calling, as an example,
 ``mkOmelyan4MN5FV(steps = steps, V = mdv, T = mdt)``.
 
+Here are the prototypes of the two Nim templates.
+
+.. code:: Nim
+
+  template mkOmelyan4MN5FV*(V,T:untyped, steps = 1,
+      theta = 0.08398315262876693,
+      rho = 0.2539785108410595,
+      lambda = 0.6822365335719091,
+      mu = -0.03230286765269967,
+      shared:static[int] = -1):untyped
+  template mkFGYin11*(V,T,Vfg,save,load:untyped, steps = 1,
+      shared:static[int] = -1):untyped =
+
+Currently the parameters, ``lambda``, ``rho``, etc., can only
+be set when the template is called.  The number of steps, ``steps``,
+on the other hand can be changed for the object returned by the
+template.  The updates, ``V`` and ``T``, will be called during
+the evolution with a single parameter, ``t``, the length of that
+particular step, c.f. the definiton of ``mdv`` and ``mdt`` above.
+
 The strength of the MDevolve_ package is that it allows easy
-construction of recursive integrators.
+construction of recursive integrators, because the ``T`` and
+``V`` can be other evolution objects returned by the above
+templates.
 
 .. code:: Nim
 
@@ -136,3 +162,7 @@ You can find more examples in the test file, `test1.nim`_.
 .. _`puregaugehmc.nim`: https://github.com/jcosborn/qex/blob/devel/src/examples/puregaugehmc.nim
 
 .. _`test1.nim`: https://github.com/jxy/MDevolve/blob/master/tests/test1.nim
+
+.. _qnhmc: https://github.com/jcosborn/qex/tree/qnhmc
+
+.. _`puregauge2du1qn.nim`: https://github.com/jcosborn/qex/blob/qnhmc/src/examples/puregauge2du1qn.nim
