@@ -259,4 +259,6 @@ There is also now a gradient flow routine
     wflowG.printPlaq
 
 This is implemented as a template that inserts the statement block
-after every step.
+after every step.  The ``wflowT`` and ``wflowG`` are the
+two variables exposed to the arbitrary statement block for the
+flow time and the gauge field at this flow time.
