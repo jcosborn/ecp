@@ -249,3 +249,14 @@ The source field ``tmps`` is first set to zero, then it loops over all
 sites within the current dilution subset and if the site is on the source
 timeslice, ``t0``, it copies the random source, ``eta``,
 at that site over to ``tmps``.
+
+There is also now a gradient flow routine
+
+.. code:: Nim
+
+  g.gaugeFlow(steps=6, eps=0.01):
+    echo "WFLOW: ", wflowT
+    wflowG.printPlaq
+
+This is implemented as a template that inserts the statement block
+after every step.
