@@ -7,8 +7,13 @@ QEX/Nim update 2019-03-21
 .. contents::
 
 .. include:: nim.rst
-.. include:: sierra.rst
+.. include:: expressions.rst
 .. include:: hmc.rst
+.. include:: analysis.rst
+.. include:: mg.rst
+.. include:: quda.rst
+.. include:: exascale.rst
+.. include:: sierra.rst
 .. include:: comms.rst
 .. include:: portability.rst
 
