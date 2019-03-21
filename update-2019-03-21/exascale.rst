@@ -1,5 +1,0 @@
-Exascale Preparations
-=====================
-
-Aurora
-------
