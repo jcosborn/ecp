@@ -2,7 +2,7 @@ Communications and I/O
 ======================
 
 Talked with Robert more at the 2019 ECP meeting about their analysis.
-Requires transfering data from full lattice to a lattice with only a
+Requires transferring data from full lattice to a lattice with only a
 subset of timeslices.  Also requires reading a lattice subset
 (timeslice) from file (not in ILDG format).
 

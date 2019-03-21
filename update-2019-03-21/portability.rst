@@ -22,8 +22,8 @@ Currently we are testing OpenMP runtime library routines for
 manual memory management and scheduling.
 
 
-OpenCL Support
---------------
+OpenCL
+------
 
 Initial tests with generating OpenCL kernel strings at compile-time
 from Nim code.

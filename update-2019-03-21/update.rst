@@ -7,8 +7,8 @@ QEX/Nim update 2019-03-21
 .. contents::
 
 .. include:: nim.rst
-.. include:: hmc.rst
 .. include:: sierra.rst
+.. include:: hmc.rst
 .. include:: comms.rst
 .. include:: portability.rst
 
