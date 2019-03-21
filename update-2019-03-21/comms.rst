@@ -7,7 +7,7 @@ subset of timeslices.  Also requires reading a lattice subset
 (timeslice) from file (not in ILDG format).
 
 QEX has a general communications layer (originally written in C, then
-converted to Nim), which allow arbitrary communications maps (similar
+converted to Nim), which allows arbitrary communications maps (similar
 to QDP/C).
 
 However, the full capability wasn't exposed in Nim since only lattice

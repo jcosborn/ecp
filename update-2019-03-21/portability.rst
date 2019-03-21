@@ -1,6 +1,14 @@
 Portability
 ===========
 
+Xiao-Yong to present a poster on results at the
+DOE Performance, Portability and Productivity Annual Meeting (`link`_),
+and give a short talk at the lattice QCD breakout session.
+He will also attend the USQCD All Hands Meeting and software meeting
+and can show the poster there.
+
+.. _link: https://doep3meeting2019.lbl.gov
+
 CUDA
 ----
 
