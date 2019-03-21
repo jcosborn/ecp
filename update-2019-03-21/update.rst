@@ -13,6 +13,7 @@ QEX/Nim update 2019-03-21
 .. include:: sierra.rst
 .. include:: comms.rst
 .. include:: portability.rst
+.. include:: opencl.rst
 
 ..
   Summit tests
