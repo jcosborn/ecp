@@ -8,12 +8,9 @@ QEX/Nim update 2019-03-21
 
 .. include:: nim.rst
 .. include:: hmc.rst
-.. include:: quda.rst
-.. include:: exascale.rst
 .. include:: sierra.rst
 .. include:: comms.rst
 .. include:: portability.rst
-.. include:: opencl.rst
 
 ..
   Summit tests
